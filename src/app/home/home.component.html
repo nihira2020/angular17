@@ -1,0 +1,64 @@
+<div>
+    <select (change)="changemodule($event)">
+        <option value="customer">Customer</option>
+        <option value="supplier">Supplier</option>
+        <option value="user">User</option>
+    </select>
+
+    @if (modulename=='customer'){
+    <h2>Customer page</h2>
+    <ul>
+        @for (item of customerlist();track item.id;let idx=$index,count=$count,first=$first,last=$last,
+        odd=$odd,even=$even){
+        <!-- <h3>count : {{count}}</h3> -->
+        @if (first==true){
+        <li style="background-color: gray;"># {{idx}} - {{item.name}}</li>
+        } @else if(last==true){
+        <li style="background-color: aqua;"># {{idx}} - {{item.name}}</li>
+        } @else{
+        <li># {{idx}} - {{item.name}}</li>
+        }
+
+        }
+    </ul>
+
+    } @else if(modulename=='supplier'){
+    <h2>Supplier page</h2>
+    @for (item of supplierlist();track item.id;let idx=$index,count=$count,first=$first,last=$last,
+    odd=$odd,even=$even){
+    <!-- <h3>count : {{count}}</h3> -->
+    @if (first==true){
+    <li style="background-color: gray;"># {{idx}} - {{item.name}}</li>
+    } @else if(last==true){
+    <li style="background-color: aqua;"># {{idx}} - {{item.name}}</li>
+    } @else{
+    <li># {{idx}} - {{item.name}}</li>
+    }
+
+    }@empty {
+    <li> There are no items. </li>
+    }
+    } @else{
+    <h2>User page</h2>
+    @for (item of Userlist();track item.id;let idx=$index,count=$count,first=$first,last=$last,
+    odd=$odd,even=$even){
+        
+
+        @switch (item.country) {
+            @case ('India') {
+                <li style="background-color: blue;"># {{idx}} - {{item.name}}</li>
+            }
+            @case ('Singapore') {
+                <li style="background-color: yellow;"># {{idx}} - {{item.name}}</li>
+            }
+            @default {
+                <li style="background-color: gray;"># {{idx}} - {{item.name}}</li>
+            }
+          }
+
+    }@empty {
+    <li> There are no items. </li>
+    }
+    }
+
+</div>
